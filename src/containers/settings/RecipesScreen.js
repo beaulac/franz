@@ -69,7 +69,7 @@ export default class RecipesScreen extends Component {
   }
 
   render() {
-    const { recipePreviews, recipes, services, user } = this.props.stores;
+    const { recipePreviews, recipes, services } = this.props.stores;
     const { showAddServiceInterface } = this.props.actions.service;
 
     const { filter } = this.props.params;
@@ -95,7 +95,6 @@ export default class RecipesScreen extends Component {
         recipes={allRecipes}
         isLoading={isLoading}
         addedServiceCount={services.all.length}
-        isPremium={user.data.isPremium}
         hasLoadedRecipes={recipePreviews.featuredRecipePreviewsRequest.wasExecuted}
         showAddServiceInterface={showAddServiceInterface}
         searchRecipes={e => this.searchRecipes(e)}

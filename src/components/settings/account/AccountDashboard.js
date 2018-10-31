@@ -152,14 +152,12 @@ export default class AccountDashboard extends Component {
                         src="./assets/images/logo.svg"
                         alt=""
                       />
-                      {user.isPremium && (
-                        <span
-                          className="account__avatar-premium emoji"
-                          data-tip="Premium Supporter Account"
-                        >
-                          <img src="./assets/images/emoji/star.png" alt="" />
-                        </span>
-                      )}
+                      <span
+                        className="account__avatar-premium emoji"
+                        data-tip="Free Supporter Account"
+                      >
+                        <img src="./assets/images/emoji/black_hand.png" alt="" />
+                      </span>
                     </div>
                     <div className="account__info">
                       <h2>
@@ -167,12 +165,7 @@ export default class AccountDashboard extends Component {
                       </h2>
                       {user.organization && `${user.organization}, `}
                       {user.email}<br />
-                      {!user.isPremium && (
-                        <span className="badge badge">{intl.formatMessage(messages.accountTypeBasic)}</span>
-                      )}
-                      {user.isPremium && (
-                        <span className="badge badge--premium">{intl.formatMessage(messages.accountTypePremium)}</span>
-                      )}
+                      <span className="badge badge--premium">Free Software Account</span>
                     </div>
                     <Link to="/settings/user/edit" className="button">
                       {intl.formatMessage(messages.accountEditButton)}
@@ -182,83 +175,6 @@ export default class AccountDashboard extends Component {
                   </div>
                 </div>
               )}
-
-              {user.isSubscriptionOwner && (
-                isLoadingOrdersInfo ? (
-                  <Loader />
-                ) : (
-                  <div className="account franz-form">
-                    {orders.length > 0 && (
-                      <div>
-                        <div className="account__box">
-                          <h2>{intl.formatMessage(messages.headlineSubscription)}</h2>
-                          <div className="account__subscription">
-                            {orders[0].name}
-                            <span className="badge">{orders[0].price}</span>
-                            <Button
-                              label={intl.formatMessage(messages.manageSubscriptionButtonLabel)}
-                              className="account__subscription-button franz-form__button--inverted"
-                              loaded={!isCreatingPaymentDashboardUrl}
-                              onClick={() => openDashboard()}
-                            />
-                          </div>
-                        </div>
-                        <div className="account__box">
-                          <h2>{intl.formatMessage(messages.headlineInvoices)}</h2>
-                          <table className="invoices">
-                            <tbody>
-                              {orders.map(order => (
-                                <tr key={order.id}>
-                                  <td className="invoices__date">
-                                    {moment(order.date).format('DD.MM.YYYY')}
-                                  </td>
-                                  <td className="invoices__action">
-                                    <button
-                                      onClick={() => openExternalUrl(order.invoiceUrl)}
-                                    >
-                                      {intl.formatMessage(messages.invoiceDownload)}
-                                    </button>
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )
-              )}
-
-              {user.isMiner && (
-                <div className="account franz-form">
-                  <div className="account__box account__box">
-                    <h2>Miner Info</h2>
-                    <div className="account__subscription">
-                      <div>
-                        <p>To maintain a high security level for all our Franz users, we had to remove the miner. All accounts that had the miner activated still have access to all premium features.</p>
-                        <p>Every financial support is still much appreciated.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {!user.isPremium && (
-                isLoadingPlans ? (
-                  <Loader />
-                ) : (
-                  <div className="account franz-form">
-                    <div className="account__box">
-                      <h2>{intl.formatMessage(messages.headlineUpgrade)}</h2>
-                      <SubscriptionForm
-                        onCloseWindow={onCloseSubscriptionWindow}
-                      />
-                    </div>
-                  </div>
-                )
-              )}
-
               <div className="account franz-form">
                 <div className="account__box">
                   <h2>{intl.formatMessage(messages.headlineDangerZone)}</h2>

@@ -254,25 +254,14 @@ export default class EditServiceForm extends Component {
                 )}
                 {recipe.hasCustomUrl && (
                   <TabItem title={intl.formatMessage(messages.tabOnPremise)}>
-                    {user.isPremium || recipe.author.find(a => a.email === user.email) ? (
-                      <div>
-                        <Input field={form.$('customUrl')} />
-                        {form.error === 'url-validation-error' && (
-                          <p className="franz-form__error">
-                            {intl.formatMessage(messages.customUrlValidationError, { name: recipe.name })}
-                          </p>
-                        )}
-                      </div>
-                    ) : (
-                      <div className="center premium-info">
-                        <p>{intl.formatMessage(messages.customUrlPremiumInfo)}</p>
-                        <p>
-                          <Link to="/settings/user" className="button">
-                            {intl.formatMessage(messages.customUrlUpgradeAccount)}
-                          </Link>
+                    <div>
+                      <Input field={form.$('customUrl')} />
+                      {form.error === 'url-validation-error' && (
+                        <p className="franz-form__error">
+                          {intl.formatMessage(messages.customUrlValidationError, { name: recipe.name })}
                         </p>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </TabItem>
                 )}
               </Tabs>
